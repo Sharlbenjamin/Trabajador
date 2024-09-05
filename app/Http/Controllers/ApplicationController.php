@@ -27,7 +27,7 @@ class ApplicationController extends Controller
     {
         $application = Application::create($request->validated());
 
-        $request->session()->flash('application.id', $application->id);
+        // $request->session()->flash('application.id', $application->id);
 
         return redirect()->route('applications.index');
     }
@@ -46,7 +46,7 @@ class ApplicationController extends Controller
     {
         $application->update($request->validated());
 
-        $request->session()->flash('application.id', $application->id);
+        // $request->session()->flash('application.id', $application->id);
 
         return redirect()->route('applications.index');
     }
