@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApplicationStoreRequest;
 use App\Http\Requests\ApplicationUpdateRequest;
 use App\Models\Application;
+use App\Models\Account;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -20,7 +22,11 @@ class ApplicationController extends Controller
 
     public function create(Request $request): View
     {
-        return view('application.create');
+        $accounts = Auth::user()->accounts;
+        $priorities = Application::priorities();
+        $statuses = Application::statuses();
+
+        return view('application.create', compact('accounts', 'priorities', 'statuses'));
     }
 
     public function store(ApplicationStoreRequest $request): RedirectResponse
@@ -29,7 +35,7 @@ class ApplicationController extends Controller
 
         // $request->session()->flash('application.id', $application->id);
 
-        return redirect()->route('applications.index');
+        return redirect()->route('accounts.index');
     }
 
     public function show(Request $request, Application $application): View

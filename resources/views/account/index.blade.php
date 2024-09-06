@@ -21,23 +21,26 @@
                             @foreach ($applications as $application)
                             <tr>
                                 <x-table-bold-column>{{$application->company}}</x-table-bold-column>
-                                <x-table-column>{{$account->date}}</x-table-column>
-                                <x-table-column>{{$account->job_title}}</x-table-column>
+                                <x-table-column>{{$application->date}}</x-table-column>
+                                <x-table-column>{{$application->job_title}}</x-table-column>
                                 <x-table-column>
                                     <x-label>
-                                        {{$account->status}}
+                                        {{$application->status}}
                                     </x-label>
                                 </x-table-column>
-                                <x-table-column>{{$account->priority}}</x-table-column>
-                                <x-table-column>{{$account->salay}}</x-table-column>
-                                <x-table-edit-column route="{{route('accounts.edit', $account)}}">Edit</x-table-edit-column>
+                                <x-table-column>{{$application->priority}}</x-table-column>
+                                <x-table-column>{{$application->salay}}</x-table-column>
+                                <x-table-edit-column route="{{route('accounts.edit', $application)}}">Edit</x-table-edit-column>
                             </tr>
                             @endforeach
                             @endif
                         </x-table> 
+                        @if (isset($application->first()->id))
+                        @else    
                         <div class="border-2 rounded-b-md text-center bg-rose-950 text-white font-medium">
                             <h4>Not Finished Yet</h4>
                         </div>
+                        @endif
                     </div>
                     <div class="col-span-12 pt-4">
                         <x-table subject="Accounts" description="" button="Add Account" route="{{route('accounts.create')}}">

@@ -25,9 +25,9 @@ class ApplicationStoreRequest extends FormRequest
             'company' => ['required', 'string', 'max:50'],
             'date' => ['nullable', 'date'],
             'job_title' => ['nullable', 'string', 'max:50'],
-            'status' => ['nullable', 'in:applied,interview,accepted,rejected'],
+            'status' => ['nullable', 'in:Applied,Interview,Accepted,Rejected'],
             'expected_reply_date' => ['nullable', 'date'],
-            'priority' => ['nullable', 'in:low,medium,high,important'],
+            'priority' => ['nullable', 'in:Low,Medium,High,Important'],
             'salary' => ['nullable', 'integer'],
         ];
     }

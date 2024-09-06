@@ -49,4 +49,14 @@ class Application extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function statuses()
+    {
+        return ['Applied','Interview','Accepted','Rejected'];
+    }
+
+    public static function priorities()
+    {
+        return ['Low','Medium','High','Important'];
+    }
 }
