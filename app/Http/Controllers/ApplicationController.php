@@ -45,7 +45,11 @@ class ApplicationController extends Controller
 
     public function edit(Request $request, Application $application): View
     {
-        return view('application.edit', compact('application'));
+        $accounts = Auth::user()->accounts;
+        $priorities = Application::priorities();
+        $statuses = Application::statuses();
+
+        return view('application.create', compact('application','accounts', 'priorities', 'statuses'));
     }
 
     public function update(ApplicationUpdateRequest $request, Application $application): RedirectResponse

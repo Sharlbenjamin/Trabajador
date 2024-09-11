@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name', 50);
             $table->string('link')->nullable();
-            $table->string('subject', 50)->nullable();
+            $table->string('category', 100)->nullable();
+            $table->string('topic', 100)->nullable();
+            $table->string('subject', 100)->nullable();
             $table->enum('level', ["easy","medium","hard","difficult"]);
             $table->enum('status', ["Preparing","Learning","Finished"]);
             $table->integer('chapters')->nullable();

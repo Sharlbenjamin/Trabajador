@@ -19,6 +19,8 @@ class Course extends Model
         'user_id',
         'name',
         'link',
+        'category',
+        'topic',
         'subject',
         'level',
         'status',
@@ -42,9 +44,18 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function subject(): BelongsTo
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
     public function progressBar()
     {
-        $progress = $this->progress / $this->chapters * 100;
-        return number_format($progress,'2', '.').'%';
+        if($this->chapters){
+            $progress = $this->progress / $this->chapters * 100;
+            return number_format($progress,'2', '.').'%';
+        }else{
+            return '0';
+        }
     }
 }

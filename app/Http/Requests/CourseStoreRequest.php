@@ -17,13 +17,15 @@ class CourseStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      */
-    public function rules(): array
+    public static function rules(): array
     {
         return [
             'user_id' => ['required', 'integer', 'exists:users,id'],
             'name' => ['required', 'string', 'max:50'],
             'link' => ['nullable', 'string'],
-            'subject' => ['nullable', 'string', 'max:50'],
+            'category' => ['nullable', 'string', 'exists:subjects,category'],
+            'topic' => ['nullable', 'string', 'exists:subjects,category'],
+            'subject' => ['nullable', 'string', 'exists:subjects,category'],
             'level' => ['nullable', 'in:Easy,Medium,Hard,Difficult'],
             'status' => ['nullable', 'in:Preparing,Learning,Finished'],
             'chapters' => ['nullable', 'integer'],

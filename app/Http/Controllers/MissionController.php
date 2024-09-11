@@ -39,7 +39,7 @@ class MissionController extends Controller
 
     public function edit(Request $request, Mission $mission): View
     {
-        return view('mission.edit', compact('mission'));
+        return view('mission.create', compact('mission'));
     }
 
     public function update(MissionUpdateRequest $request, Mission $mission): RedirectResponse

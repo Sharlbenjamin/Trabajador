@@ -3,7 +3,7 @@
         Accounts
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-12 p-4 divide-y">
                     <div class="col-span-12">
@@ -30,7 +30,7 @@
                                 </x-table-column>
                                 <x-table-column>{{$application->priority}}</x-table-column>
                                 <x-table-column>{{$application->salay}}</x-table-column>
-                                <x-table-edit-column route="{{route('accounts.edit', $application)}}">Edit</x-table-edit-column>
+                                <x-table-edit-column route="{{route('applications.edit', $application)}}">Edit</x-table-edit-column>
                             </tr>
                             @endforeach
                             @endif

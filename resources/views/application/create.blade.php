@@ -3,13 +3,13 @@
         New Application
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-12 p-4">
                     <div class="col-span-4"></div>
                     <div class="col-span-4 p-4 border-2 rounded-md">
                         @if (isset($application->id))
-                        <form action="{{route('applications.update', $pplication)}}" method="POST">
+                        <form action="{{route('applications.update', $application)}}" method="POST">
                             @method('PUT')
                         @else
                         <form action="{{route('applications.store')}}" method="POST">
@@ -80,6 +80,9 @@
                                 <x-danger-button>Cancel</x-danger-button>
                             </a>
                         </div>
+                        @if(isset($application->id))
+                            @livewire('delete-application', ['application' => $application], key($application->id))
+                        @endif
                     </form>
                     </div>
                 </div>

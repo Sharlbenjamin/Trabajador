@@ -1,74 +1,17 @@
 created:
-    - app/Http/Controllers/AccountController.php
-    - app/Http/Controllers/CourseController.php
-    - app/Http/Controllers/ApplicationController.php
-    - app/Http/Controllers/MissionController.php
-    - app/Http/Controllers/TaskController.php
-    - app/Http/Controllers/LabelController.php
-    - database/factories/AccountFactory.php
-    - database/factories/ApplicationFactory.php
-    - database/factories/AccountApplicationFactory.php
-    - database/factories/CourseFactory.php
-    - database/factories/MissionFactory.php
-    - database/factories/LabelFactory.php
-    - database/factories/TaskFactory.php
-    - database/factories/TaskLabelFactory.php
-    - database/migrations/2024_09_04_210421_create_accounts_table.php
-    - database/migrations/2024_09_04_210422_create_applications_table.php
-    - database/migrations/2024_09_04_210423_create_account_applications_table.php
-    - database/migrations/2024_09_04_210424_create_courses_table.php
-    - database/migrations/2024_09_04_210425_create_missions_table.php
-    - database/migrations/2024_09_04_210426_create_labels_table.php
-    - database/migrations/2024_09_04_210427_create_tasks_table.php
-    - database/migrations/2024_09_04_210428_create_task_labels_table.php
-    - database/migrations/2024_09_04_210429_create_label_task_table.php
-    - app/Models/Account.php
-    - app/Models/Application.php
-    - app/Models/AccountApplication.php
-    - app/Models/Course.php
-    - app/Models/Mission.php
-    - app/Models/Label.php
-    - app/Models/Task.php
-    - app/Models/TaskLabel.php
-    - tests/Feature/Http/Controllers/AccountControllerTest.php
-    - tests/Feature/Http/Controllers/CourseControllerTest.php
-    - tests/Feature/Http/Controllers/ApplicationControllerTest.php
-    - tests/Feature/Http/Controllers/MissionControllerTest.php
-    - tests/Feature/Http/Controllers/TaskControllerTest.php
-    - tests/Feature/Http/Controllers/LabelControllerTest.php
-    - app/Http/Requests/AccountStoreRequest.php
-    - app/Http/Requests/CourseStoreRequest.php
-    - app/Http/Requests/ApplicationStoreRequest.php
-    - app/Http/Requests/MissionStoreRequest.php
-    - app/Http/Requests/TaskStoreRequest.php
-    - app/Http/Requests/LabelStoreRequest.php
+    - app/Http/Controllers/SubjectController.php
+    - database/factories/SubjectFactory.php
+    - database/migrations/2024_09_08_164149_create_subjects_table.php
+    - app/Models/Subject.php
+    - tests/Feature/Http/Controllers/SubjectControllerTest.php
+    - app/Http/Requests/SubjectStoreRequest.php
+    - app/Http/Requests/SubjectUpdateRequest.php
+    - resources/views/subject/index.blade.php
+    - resources/views/subject/create.blade.php
+    - resources/views/subject/show.blade.php
+    - resources/views/subject/edit.blade.php
 updated:
     - routes/web.php
-skipped:
-    - resources/views/account/index.blade.php
-    - resources/views/account/create.blade.php
-    - resources/views/account/show.blade.php
-    - resources/views/account/edit.blade.php
-    - resources/views/course/index.blade.php
-    - resources/views/course/create.blade.php
-    - resources/views/course/show.blade.php
-    - resources/views/course/edit.blade.php
-    - resources/views/application/index.blade.php
-    - resources/views/application/create.blade.php
-    - resources/views/application/show.blade.php
-    - resources/views/application/edit.blade.php
-    - resources/views/mission/index.blade.php
-    - resources/views/mission/create.blade.php
-    - resources/views/mission/show.blade.php
-    - resources/views/mission/edit.blade.php
-    - resources/views/task/index.blade.php
-    - resources/views/task/create.blade.php
-    - resources/views/task/show.blade.php
-    - resources/views/task/edit.blade.php
-    - resources/views/label/index.blade.php
-    - resources/views/label/create.blade.php
-    - resources/views/label/show.blade.php
-    - resources/views/label/edit.blade.php
 models:
     Account: { user_id: 'id foreign', website: 'string:50 required', username: 'string:50 nullable', email: 'string:50 nullable', account_password: 'string:50 nullable', password: 'string:50 nullable', relationships: { hasMany: 'Application, Mission' } }
     Application: { user_id: 'id foreign', account_id: 'id foreign', company: 'string:50 required', date: 'date nullable', job_title: 'string:50 nullable', status: 'enum:applied,interview,accepted,rejected nullable', expected_reply_date: 'date nullable', priority: 'enum:low,medium,high,important nullable', salary: 'integer nullable', relationships: { belongsTo: Account } }
@@ -78,3 +21,4 @@ models:
     Label: { name: 'required string:50', color: 'nullable string:50', relationships: { belongsToMany: Task } }
     Task: { user_id: 'id foreign', mission_id: 'id foreign', name: 'required string:50', description: 'nullable string:200', time: 'date nullable', status: 'boolean default:0', relationships: { belongsToMany: Label, belongsTo: 'User, Mission' } }
     TaskLabel: { task_id: 'id foreign', label_id: 'id foreign' }
+    Subject: { category: 'string:100 required', topic: 'string:100 required', subject: 'string:100 required', relationships: { hasMany: Course } }

@@ -27,7 +27,7 @@ class TaskController extends Controller
     {
         $task = Task::create($request->validated());
 
-        $request->session()->flash('task.id', $task->id);
+        // $request->session()->flash('task.id', $task->id);
 
         return redirect()->route('tasks.index');
     }
@@ -46,7 +46,7 @@ class TaskController extends Controller
     {
         $task->update($request->validated());
 
-        $request->session()->flash('task.id', $task->id);
+        // $request->session()->flash('task.id', $task->id);
 
         return redirect()->route('tasks.index');
     }

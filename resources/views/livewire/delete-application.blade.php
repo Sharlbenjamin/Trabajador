@@ -1,3 +1,3 @@
 <div>
-    {{-- The Master doesn't talk, he acts. --}}
+    <x-danger-button class="w-full mt-4" wire:click="DeleteApplication">Delete</x-danger-button>
 </div>

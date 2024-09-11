@@ -1,91 +1,11 @@
 models:
-  Account:
-    user_id: id foreign
-    website: string:50 required
-    username: string:50 nullable
-    email: string:50 nullable
-    account_password: string:50 nullable
-    password: string:50 nullable
+  Subject:
+    category: string:100 required
+    topic: string:100 required
+    subject: string:100 required
     relationships:
-      hasMany: Application, Mission
-
-  Application:
-    user_id: id foreign
-    account_id: id foreign
-    company: string:50 required
-    date: date nullable
-    job_title: string:50 nullable
-    status: enum:applied,interview,accepted,rejected nullable
-    expected_reply_date: date nullable
-    priority: enum:low,medium,high,important nullable
-    salary: integer nullable
-    relationships:
-      belongsTo: Account
-
-  AccountApplication:
-    account_id: id foreign
-    application_id: id foreign
-
-  Course:
-    user_id: id foreign
-    name: string:50 required
-    link: string nullable
-    subject: string:50 nullable
-    level: enum:easy,medium,hard,difficult
-    chapters: nullable integer
-    length: nullable integer
-    progress: nullable integer
-
-  Mission:
-    user_id: id foreign
-    account_id: id foreign
-    name: string:50 required
-    company: string:50 nullable
-    priority: enum:low,medium,high,important nullable
-    urgency: enum:slow,medium,fast,urgent nullable
-    submission_date: date nullable
-    status: enum:waiting,received,pending,submitted,accepted nullable
-    income: integer nullable
-    relationships:
-      belongsTo: Account
-      hasMany: Task
-
-  Label:
-    name: required string:50
-    color: nullable string:50
-    relationships:
-      belongsToMany: Task
-
-  Task:
-    user_id: id foreign
-    mission_id: id foreign
-    name: required string:50
-    description: nullable string:200
-    time: date nullable
-    status: boolean default:0
-    relationships:
-      belongsToMany: Label
-      belongsTo: User, Mission
-    
-  TaskLabel:
-    task_id: id foreign
-    label_id: id foreign
+      hasMany: Course
 
 controllers:
-  Account:
-    resource: index, show, create, store, edit, update, destroy
-
-  Course:
-    resource: index, show, create, store, edit, update, destroy
-    
-  Application:
-    resource: index, show, create, store, edit, update, destroy
-
-  Mission:
-    resource: index, show, create, store, edit, update, destroy
-
-  Task:
-    resource: index, show, create, store, edit, update, destroy
-
-  Label:
+  Subject:
     resource: index, show, create, store, edit, update, destroy

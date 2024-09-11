@@ -28,3 +28,5 @@ Route::resource('missions', App\Http\Controllers\MissionController::class);
 Route::resource('tasks', App\Http\Controllers\TaskController::class);
 
 Route::resource('labels', App\Http\Controllers\LabelController::class);
+
+Route::resource('subjects', App\Http\Controllers\SubjectController::class);

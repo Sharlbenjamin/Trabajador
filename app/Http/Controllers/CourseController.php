@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
 use App\Models\Course;
+use App\Models\Subject;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +21,9 @@ class CourseController extends Controller
 
     public function create(Request $request): View
     {
-        return view('course.create');
+        $subjects = Subject::all();
+
+        return view('course.create', compact('subjects'));
     }
 
     public function store(CourseStoreRequest $request): RedirectResponse
