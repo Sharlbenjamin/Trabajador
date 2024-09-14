@@ -14,9 +14,7 @@ class CourseController extends Controller
 {
     public function index(Request $request): View
     {
-        $courses = Course::all();
-
-        return view('course.index', compact('courses'));
+        return view('course.index');
     }
 
     public function create(Request $request): View

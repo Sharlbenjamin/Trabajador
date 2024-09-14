@@ -30,3 +30,10 @@ Route::resource('tasks', App\Http\Controllers\TaskController::class);
 Route::resource('labels', App\Http\Controllers\LabelController::class);
 
 Route::resource('subjects', App\Http\Controllers\SubjectController::class);
+
+
+Route::resource('categories', App\Http\Controllers\CategoryController::class);
+
+Route::resource('topics', App\Http\Controllers\TopicController::class);
+
+Route::resource('subjects', App\Http\Controllers\SubjectController::class);

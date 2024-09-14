@@ -1,17 +1,38 @@
 created:
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/TopicController.php
     - app/Http/Controllers/SubjectController.php
     - database/factories/SubjectFactory.php
-    - database/migrations/2024_09_08_164149_create_subjects_table.php
+    - database/factories/TopicFactory.php
+    - database/factories/CategoryFactory.php
+    - database/migrations/2024_09_13_150257_create_subjects_table.php
+    - database/migrations/2024_09_13_150258_create_topics_table.php
+    - database/migrations/2024_09_13_150259_create_categories_table.php
     - app/Models/Subject.php
+    - app/Models/Topic.php
+    - app/Models/Category.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/TopicControllerTest.php
     - tests/Feature/Http/Controllers/SubjectControllerTest.php
-    - app/Http/Requests/SubjectStoreRequest.php
-    - app/Http/Requests/SubjectUpdateRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/TopicStoreRequest.php
+    - app/Http/Requests/TopicUpdateRequest.php
+    - resources/views/category/index.blade.php
+    - resources/views/category/create.blade.php
+    - resources/views/category/show.blade.php
+    - resources/views/category/edit.blade.php
+    - resources/views/topic/index.blade.php
+    - resources/views/topic/create.blade.php
+    - resources/views/topic/show.blade.php
+    - resources/views/topic/edit.blade.php
+updated:
+    - routes/web.php
+skipped:
     - resources/views/subject/index.blade.php
     - resources/views/subject/create.blade.php
     - resources/views/subject/show.blade.php
     - resources/views/subject/edit.blade.php
-updated:
-    - routes/web.php
 models:
     Account: { user_id: 'id foreign', website: 'string:50 required', username: 'string:50 nullable', email: 'string:50 nullable', account_password: 'string:50 nullable', password: 'string:50 nullable', relationships: { hasMany: 'Application, Mission' } }
     Application: { user_id: 'id foreign', account_id: 'id foreign', company: 'string:50 required', date: 'date nullable', job_title: 'string:50 nullable', status: 'enum:applied,interview,accepted,rejected nullable', expected_reply_date: 'date nullable', priority: 'enum:low,medium,high,important nullable', salary: 'integer nullable', relationships: { belongsTo: Account } }
@@ -21,4 +42,6 @@ models:
     Label: { name: 'required string:50', color: 'nullable string:50', relationships: { belongsToMany: Task } }
     Task: { user_id: 'id foreign', mission_id: 'id foreign', name: 'required string:50', description: 'nullable string:200', time: 'date nullable', status: 'boolean default:0', relationships: { belongsToMany: Label, belongsTo: 'User, Mission' } }
     TaskLabel: { task_id: 'id foreign', label_id: 'id foreign' }
-    Subject: { category: 'string:100 required', topic: 'string:100 required', subject: 'string:100 required', relationships: { hasMany: Course } }
+    Subject: { subject: 'string:100 required', relationships: { hasMany: Course, belongsTo: 'Topic, Category' } }
+    Topic: { topic: 'string:100 required', relationships: { hasMany: 'Course, Subject', belongsTo: Category } }
+    Category: { category: 'string:100 required', relationships: { hasMany: 'Course, Topic, Subject' } }

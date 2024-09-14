@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\Category;
+use App\Models\Topic;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -33,17 +35,11 @@ class CreateCourse extends Component
     
     public function render()
     {
-        $this->categories = Subject::all()->unique('category')->sortBy('category');
+        $this->categories = Category::all();
 
-        $this->topics = Subject::when($this->category, function($query){
-            $query->where('category', $this->category);
-        })->get()->unique('topic')->sortBy('topic');
+        $this->topics = topic::all();
 
-        $this->subjects = Subject::when($this->category, function($query){
-            $query->where('category', $this->category);
-        })->when($this->topic, function($query){
-            $query->where('topic', $this->topic);
-        })->get()->unique('subject')->sortBy('subject');
+        $this->subjects = Subject::all();
 
 
         return view('livewire.create-course');

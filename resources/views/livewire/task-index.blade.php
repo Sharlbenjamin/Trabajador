@@ -18,5 +18,5 @@
         </div>
         @endif
     </x-table-column>
-    <x-table-column class="text-rose-600 cursor-pointer font-bold" wire:click="DeleteTask">Delete this Task</x-table-column>
+    <x-table-column class="text-rose-600 cursor-pointer font-bold" wire:click="DeleteTask" wire:confirm="Are you sure you wnat to delete this task ?">Delete this Task</x-table-column>
 </tr>

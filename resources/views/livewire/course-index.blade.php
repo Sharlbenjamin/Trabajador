@@ -1,7 +1,7 @@
 <div class="grid grid-cols-12">
     <div class="mt-4 col-span-3 space-y-2 p-8">
-        <x-input-label>Category</x-input-label>
-        <select wire:model.live="category" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
+        <p>Category</p>
+        <select wire:model.live="category" name="s" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
             <option value="">Select Category</option>
             @foreach ($categoryDropdown as $item)
                 <option value="{{$item->category}}">{{$item->category}}</option>
@@ -9,17 +9,17 @@
         </select>
     </div>
     <div class="mt-4 col-span-3 space-y-2 p-8">
-        <x-input-label>Topic</x-input-label>
-        <select wire:model.live="topic" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
+        <p>Topic</p>
+        <select wire:model.live="topic" name="ssss" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
             <option value="">Select Topic</option>
-            @foreach ($topicDropdown as $item)
-                <option value="{{$item->topic}}">{{$item->topic}}</option>
+            @foreach ($topicDropdown->unique('topic') as $category)
+                <option value="{{$category->topic}}">{{$category->topic}}</option>
             @endforeach
         </select>
     </div>
     <div class="mt-4 col-span-3 space-y-2 p-8">
-        <x-input-label>Subject</x-input-label>
-        <select wire:model.live="subject" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
+        <p>Subject</p>
+        <select wire:model.live="subject" name="ss" class="w-full rounded-md border-2 border-gray-200 hover:border-sky-400">
             <option value="">Select Subject</option>
             @foreach ($subjectDropdown as $item)
                 <option value="{{$item->subject}}">{{$item->subject}}</option>
@@ -27,12 +27,12 @@
         </select>
     </div>
     <div class="mt-4 col-span-3 space-y-2 p-8">
-        <x-input-label>Course Name</x-input-label>
-        <x-input name="" wire:model.live="name" class="w-full"></x-input>
+        <p>Course Name</p>
+        <x-input name="sss" wire:model.live="name" class="w-full"></x-input>
     </div>
     <div class="col-span-12 p-4">
         <x-table subject="Courses" description="Believe in yourself and you will achieve the impossible" button="Add Course" route="{{route('courses.create')}}">
-        <x-slot name="tableHeader">{{$subjects}}
+        <x-slot name="tableHeader">
             <x-table-header>#</x-table-header>
             <x-table-bold-header>Name</x-table-bold-header>
             <x-table-header>Category</x-table-header>
@@ -44,10 +44,9 @@
             <x-table-header class="text-center">Progress</x-table-header>
             <x-table-edit-header>edit</x-table-edit-header>
         </x-slot>
-        @if (isset($courses->first()->id))
-        @foreach ($courses as $course)
+        @foreach ($courses as $index => $course)
         <tr>
-            <x-table-column>{{$loop->iteration}}</x-table-column>
+            <x-table-column></x-table-column>
             <x-table-bold-column class="text-sky-800 font-bold">
                 <a href="{{$course->link}}">
                     {{$course->name}}
@@ -71,27 +70,12 @@
             </x-table-column>
             <x-table-column>{{$course->level}}</x-table-column>
             <x-table-column>{{$course->chapters}}</x-table-column>
-            <x-table-column>
-                <div x-data="{bar : false}" @click="bar = true">
-                    <div class="mt-6 cursor-pointer" aria-hidden="true">
-                        <div class="overflow-hidden rounded-full bg-gray-200">
-                        <div class="h-2 rounded-full bg-indigo-600" style="width: {{$course->progressBar()}}"></div>
-                        </div>
-                        <div class="mt-6 hidden grid-cols-3 text-sm text-gray-600 sm:grid">
-                        <div class="text-indigo-600">0%</div>
-                        <div class="{{$course->progressBar() >= 50 ? 'text-indigo-600' : ''}} text-center">50%</div>
-                        <div class="{{$course->progressBar() == 100 ? 'text-indigo-600' : ''}} text-right">100%</div>
-                        </div>
-                    </div>
-                    <div class="" x-show="bar">  
-                        @livewire('progress-bar', ['course' => $course], key($course->id))
-                        </div>
-                    </div>
+            <x-table-column >
+            {{$course->progressBar()}}
             </x-table-column>
             <x-table-edit-column route="{{route('courses.edit', $course)}}">Edit</x-table-edit-column>
         </tr>
         @endforeach
-        @endif
         </x-table>
     </div>
 </div>

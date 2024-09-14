@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Subject extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -17,9 +16,7 @@ class Subject extends Model
      * @var array
      */
     protected $fillable = [
-        'subject',
-        'topic_id',
-        'category_id',
+        'category',
     ];
 
     /**
@@ -29,8 +26,6 @@ class Subject extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'topic_id' => 'integer',
-        'category_id' => 'integer',
     ];
 
     public function courses(): HasMany
@@ -38,13 +33,13 @@ class Subject extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function topic(): BelongsTo
+    public function topics(): HasMany
     {
-        return $this->belongsTo(Topic::class);
+        return $this->hasMany(Topic::class);
     }
 
-    public function category(): BelongsTo
+    public function subjects(): HasMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Subject::class);
     }
 }

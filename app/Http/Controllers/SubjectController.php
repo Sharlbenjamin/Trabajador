@@ -27,7 +27,7 @@ class SubjectController extends Controller
     {
         $subject = Subject::create($request->validated());
 
-        //$request->session()->flash('subject.id', $subject->id);
+        $request->session()->flash('subject.id', $subject->id);
 
         return redirect()->route('subjects.index');
     }
@@ -46,7 +46,7 @@ class SubjectController extends Controller
     {
         $subject->update($request->validated());
 
-        // $request->session()->flash('subject.id', $subject->id);
+        $request->session()->flash('subject.id', $subject->id);
 
         return redirect()->route('subjects.index');
     }

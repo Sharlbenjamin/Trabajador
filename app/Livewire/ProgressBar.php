@@ -8,25 +8,25 @@ use App\Models\Course;
 class ProgressBar extends Component
 {
     public $course;
+    public $index;
     public $progress;
+    public $updatedCourse;
 
     public function render()
     {
         return view('livewire.progress-bar');
     }
 
-    public function mount()
+    public function mount($index, $course)
     {
-        $updatedCourse = Course::find($this->course->id);
-        $this->progress = $updatedCourse->progress;
-        return view('livewire.progress-bar');
+        $this->index = $index;
+        $this->course = $course;
+        $this->progress = $this->course->progress;
     }
 
     public function ProgressUpdate()
     {
-        $updatedCourse = Course::find($this->course->id);
-
-        $updatedCourse->update([
+        $this->course->update([
             'progress' => $this->progress
         ]);
 

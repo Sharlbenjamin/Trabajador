@@ -1,11 +1,27 @@
 models:
   Subject:
-    category: string:100 required
-    topic: string:100 required
     subject: string:100 required
     relationships:
       hasMany: Course
+      belongsTo: Topic, Category
+
+  Topic:
+    topic: string:100 required
+    relationships:
+      hasMany: Course, Subject
+      belongsTo: Category
+    
+  Category:
+    category: string:100 required
+    relationships:
+      hasMany: Course, Topic, Subject
 
 controllers:
+  Category:
+    resource: index, show, create, store, edit, update, destroy
+  
+  Topic:
+    resource: index, show, create, store, edit, update, destroy
+
   Subject:
     resource: index, show, create, store, edit, update, destroy
